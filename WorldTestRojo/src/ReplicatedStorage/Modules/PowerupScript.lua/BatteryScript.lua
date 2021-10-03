@@ -1,0 +1,2 @@
+local BatteryScript = {}
+return BatteryScript

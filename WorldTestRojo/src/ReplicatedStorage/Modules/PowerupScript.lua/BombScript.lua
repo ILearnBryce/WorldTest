@@ -1,0 +1,2 @@
+local BombScript = {}
+return BombScript

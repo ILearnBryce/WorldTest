@@ -1,0 +1,2 @@
+local JumpPowerScript = {}
+return JumpPowerScript
