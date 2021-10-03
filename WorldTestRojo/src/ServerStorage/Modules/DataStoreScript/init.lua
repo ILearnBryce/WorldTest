@@ -30,13 +30,26 @@ function DataStoreScript.ClientFunc.DataGet(Variables)
         else
             Slot = DataStoreService.Data[Player.UserId][Slot]
         end
-        Value = StringToObjectScript(DataKey)
+        Value = StringToObjectScript(DataKey, Slot)
     else error("ServerStorage.Modules.DataStoreScript - Player Data is not loaded, Script is not functioning correctly?")
     end
     return Value
 end
 
 function DataStoreScript.ClientFunc.DataChange(Variables)
+    local Player = Variables[1]
+    local Slot = Variables[2]
+    local DataKey = Variables[3]
+    local Value = Variables[4]
+    if DataStoreScript.DataLoaded[Player.UserId] == true then
+        if Slot == "Current" then
+            Slot = DataStoreService.Data[Player.UserId][DataStoreService.Data[Player.UserId]["N/A"].Slot]
+        else
+            Slot = DataStoreService.Data[Player.UserId][Slot]
+        end
+        StringToObjectScript(DataKey, Slot) = Value
+    else error("ServerStorage.Modules.DataStoreScript - Player Data is not loaded, Script is not functioning correctly?")
+    end
 end
 
 function DataStoreScript.SortData(Data, DataSaved)
@@ -52,6 +65,10 @@ function DataStoreScript.GetAsync(DataStore, DataFile, Attempts)
         Success, Message = pcall(function()
             Data = DataStore:GetAsync(DataFile)
         end)
+        if not Success then
+            warn("ServerStorage.Modules.DataStoreScript - " .. Message)
+            wait(1)
+        end
     until Success or Tries >= Attempts
     return Data, Success
 end
@@ -102,7 +119,9 @@ function DataStoreScript.PlayerAdded(Player)
                 DataLoaded = false
             end
         end
-        
+        if DataLoaded then
+            print("ServerStorage.Modules.DataStoreScript - " .. Player.Name .. "'s Data Successfully Loaded!")
+        end
     end
 end
 
