@@ -2391,6 +2391,6 @@ for _, Path in pairs (Paths) do
 end
 print("Success")
 
-setclipboard(HttpService:JSONEncode(InstanceTable))
+print(HttpService:JSONEncode(InstanceTable))
 
 end)
