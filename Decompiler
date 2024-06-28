@@ -2390,6 +2390,5 @@ for _, Path in pairs (Paths) do
 	InstanceTable[Path.Name] = RecurseChild(Path)
 end
 print("Success")
-setclipboard(tostring(HttpService:JSONEncode(InstanceTable)))
 
 end)
