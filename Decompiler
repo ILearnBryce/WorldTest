@@ -2320,7 +2320,9 @@ function GetProperties(Obj)
 						local ObjectSettings = Instance.new("NumberValue", Obj)
 						ObjectSettings.Name = "ObjectSettings_" .. Property
 						pcall(function()
-							ObjectSettings.Value = Obj[Property]:WaitForChild("ObjectNum").Value
+							spawn(function()
+								ObjectSettings.Value = Obj[Property]:WaitForChild("ObjectNum").Value
+							end)
 						end)
 					end
 				end
