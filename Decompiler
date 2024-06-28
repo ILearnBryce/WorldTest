@@ -1,5 +1,4 @@
-repeat wait() until game:IsLoaded()
-
+spawn(function()
 local HttpService = game:GetService("HttpService")
 
 local InstanceTable = {}
@@ -2392,3 +2391,5 @@ for _, Path in pairs (Paths) do
 end
 print("Success")
 setclipboard(tostring(HttpService:JSONEncode(InstanceTable)))
+
+end)
