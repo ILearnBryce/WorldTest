@@ -2349,7 +2349,7 @@ function RecurseChild(Obj)
 	return Children
 end
 
-local Paths = {workspace, game.SoundService, game.Lighting, game.MaterialService, game.ReplicatedFirst, game.ReplicatedStorage, game.StarterGui, game.StarterPlayer.StarterCharacterScripts, game.StarterPlayer.StarterPlayerScripts, game.Players.LocalPlayer.PlayerGui}
+local Paths = {workspace, game.Lighting, game.MaterialService, game.ReplicatedFirst, game.ReplicatedStorage, game.StarterGui, game.StarterPlayer.StarterPlayerScripts}
 local PartNum = 0
 
 for _, Path in pairs (Paths) do
