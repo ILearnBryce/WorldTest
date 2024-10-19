@@ -2393,4 +2393,5 @@ print("Success")
 
 print(HttpService:JSONEncode(InstanceTable))
 
+setclipboard(HttpService:JSONEncode(InstanceTable))
 end)
