@@ -2348,7 +2348,8 @@ function RecurseChild(Obj)
 	return Children
 end
 
-local Paths = {workspace.World.Stages["1. Raven Spire"], workspace.World.Stages["2. Concatta but BETTER"]}
+local Paths = {workspace.World.Stages["3. Canyon Conservatory"], workspace.World.Stages["4. Fractured Citadel"], 
+workspace.World.Stages["5. The Waterworks"]}
 local PartNum = 0
 
 for _, Path in pairs (Paths) do
