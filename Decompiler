@@ -2334,7 +2334,7 @@ end
 function RecurseChild(Obj)
 	local Children = {}
 	for _, Child in pairs (Obj:GetChildren()) do
-		if not table.find(NeglectClasses, Child.ClassName) then
+		if not table.find(NeglectClasses, Child.ClassName) and not Child:IsDescendantOf(workspace.World) and Child ~= workspace.World then
 			pcall(function()
 				table.insert(Children, {
 					["Name"] = Child.Name,
@@ -2348,15 +2348,15 @@ function RecurseChild(Obj)
 	return Children
 end
 
-local Paths = {workspace.World.Stages["7. Mt. Awesome]}
+local Paths = {workspace.World}
 local PartNum = 0
 
-for _, Path in pairs (Paths) do
+
 	PartNum += 1
-	local ObjectNum = Instance.new("NumberValue", Path)
+	local ObjectNum = Instance.new("NumberValue", workspace)
 	ObjectNum.Name = "ObjectNum"
 	ObjectNum.Value = PartNum
-	for _, InstanceRender in pairs (Path:GetDescendants()) do
+	for _, InstanceRender in pairs (workspace:GetDescendants()) do
 		local Success, Error = pcall(function()
 			PartNum += 1
 			local ObjectNum = Instance.new("NumberValue", InstanceRender)
@@ -2367,7 +2367,6 @@ for _, Path in pairs (Paths) do
 			warn(Error)
 		end
 	end
-end
 
 local LightingConfig = Instance.new("Configuration", game.Lighting)
 LightingConfig.Name = "LightingProperties"
@@ -2386,9 +2385,7 @@ for _, Property in pairs (Properties.Lighting) do
 	end
 end
 
-for _, Path in pairs (Paths) do
-	InstanceTable[Path.Name] = RecurseChild(Path)
-end
+InstanceTable = RecurseChild(workspace)
 print("Success")
 
 print(HttpService:JSONEncode(InstanceTable))
