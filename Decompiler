@@ -2348,7 +2348,7 @@ spawn(function()
 		return Children
 	end
 
-	local Paths = {workspace.Engine, workspace.NPCs, workspace["WaterfallsIG??"], workspace.Unorganized}
+	local Paths = {workspace}
 	local PartNum = 0
 
 	for _, Path in pairs (Paths) do
