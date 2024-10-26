@@ -2348,6 +2348,23 @@ spawn(function()
 		return Children
 	end
 
+function Yummers(Obj)
+	local Children = {}
+		for _, Child in pairs (Obj:GetChildren()) do
+if Child:IsA("Model") then
+				pcall(function()
+					table.insert(Children, {
+						["Name"] = Child.Name,
+						["ClassName"] = Child.ClassName,
+						["Properties"] = GetProperties(Child),
+						["Children"] = RecurseChild(Child)
+					})
+				end)
+end
+end
+return Children
+end
+
 	local Paths = {workspace}
 	local PartNum = 0
 
@@ -2387,7 +2404,7 @@ spawn(function()
 	end
 
 	for _, Path in pairs (Paths) do
-		InstanceTable[Path.Name] = RecurseChild(Path)
+		InstanceTable[Path.Name] = Yummers(Path)
 	end
 	print("Success")
 
