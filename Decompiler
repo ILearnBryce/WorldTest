@@ -2351,7 +2351,7 @@ spawn(function()
 function Yummers(Obj)
 	local Children = {}
 		for _, Child in pairs (Obj:GetChildren()) do
-if Child:IsA("Model") and Child.Name ~= "Model" then
+if Child:IsA("Model") and Child.Name == "Model" then
 				pcall(function()
 					table.insert(Children, {
 						["Name"] = Child.Name,
