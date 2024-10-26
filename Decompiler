@@ -1,6 +1,6 @@
 spawn(function()
 local HttpService = game:GetService("HttpService")
-
+ 
 local InstanceTable = {}
 
 local NeglectClasses = {"Camera", "Terrain", "WrapLayer", "WrapTarget", "Union", "Intersection", "NegativePart", "Status", "PackageLink"}
