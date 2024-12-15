@@ -2348,7 +2348,7 @@ spawn(function()
 		return Children
 	end
 
-	local Paths = {game.Lighting}
+	local Paths = {workspace, game.MaterialService}
 	local PartNum = 0
 
 	for _, Path in pairs (Paths) do
