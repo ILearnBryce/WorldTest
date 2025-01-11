@@ -2323,11 +2323,6 @@ spawn(function()
 	end
 	local function GetProperties(Obj)
 		local ObjProperties = {}
-		if Obj:IsA("MeshPart") then
-			local OriginalParent = Instance.new("NumberValue", Obj)
-			OriginalParent.Name = "OriginalParent"
-			OriginalParent.Value = Obj.Parent:WaitForChild("ObjectNum").Value
-		end
 		for Class, PropertiesOfClass in pairs (Properties) do
 			if Obj:IsA(Class) then
 				for _, Property in pairs (PropertiesOfClass) do
@@ -2335,14 +2330,6 @@ spawn(function()
 						if typeof(Obj[Property]) ~= "Instance" and typeof(Obj[Property]) ~= "nil" then
 							local ObjProperty = ConvertToJSONProperties(Property, Obj[Property])
 							ObjProperties[Property] = ObjProperty
-						elseif typeof(Obj[Property]) == "Instance" then
-							local ObjectSettings = Instance.new("NumberValue", Obj)
-							ObjectSettings.Name = "ObjectSettings_" .. Property
-							pcall(function()
-								spawn(function()
-									ObjectSettings.Value = Obj[Property]:WaitForChild("ObjectNum").Value
-								end)
-							end)
 						end
 					end
 				end
