@@ -8,15 +8,15 @@ task.wait(2)
 
 local Paths = {workspace} --, game.Lighting
 local PartNum = 0
---[[local InitialDataVector = Vector2.new(0, 0)
+local InitialDataVector = Vector2.new(0, 0)
 local FinalDataVector = Vector2.new(600, 600)
-local Translate = Vector2.new(0, -1)
+local Translate = Vector2.new(0, 0)
 
 local DistanceX = Translate.X * (FinalDataVector.X - InitialDataVector.X)
 local DistanceY = Translate.Y * (FinalDataVector.Y - InitialDataVector.Y)
 
 InitialDataVector = Vector2.new(InitialDataVector.X + DistanceX, InitialDataVector.Y + DistanceY)
-FinalDataVector = Vector2.new(FinalDataVector.X + DistanceX, FinalDataVector.Y + DistanceY)]]--
+FinalDataVector = Vector2.new(FinalDataVector.X + DistanceX, FinalDataVector.Y + DistanceY)
 
 spawn(function()
 	local HttpService = game:GetService("HttpService")
@@ -2393,7 +2393,10 @@ spawn(function()
 		if Path == workspace then
 			for _, Child in pairs (workspace:GetDescendants()) do
 				if Child:IsA("BasePart") and not table.find(NeglectClasses, Child.ClassName) then
-					Child:Clone().Parent = Folder
+					if (Child.Position.X >= InitialDataVector.X and Child.Position.X <= FinalDataVector.X) and
+						(Child.Position.Z >= InitialDataVector.Y and Child.Position.Z <= FinalDataVector.Y) then
+						Child:Clone().Parent = Folder
+					end
 				end
 			end
 		end
