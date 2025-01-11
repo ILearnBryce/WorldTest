@@ -9,7 +9,7 @@ task.wait(2)
 local Paths = {workspace} --, game.Lighting
 local PartNum = 0
 local InitialDataVector = Vector2.new(0, 0)
-local FinalDataVector = Vector2.new(1200, 1200)
+local FinalDataVector = Vector2.new(800, 800)
 local Translate = Vector2.new(0, 0)
 
 local DistanceX = Translate.X * (FinalDataVector.X - InitialDataVector.X)
