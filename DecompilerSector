@@ -9,7 +9,7 @@ task.wait(2)
 local Paths = {workspace} --, game.Lighting
 local PartNum = 0
 local InitialDataVector = Vector2.new(0, 0)
-local FinalDataVector = Vector2.new(800, 800)
+local FinalDataVector = Vector2.new(500, 500)
 local Translate = Vector2.new(0, 0)
 
 local DistanceX = Translate.X * (FinalDataVector.X - InitialDataVector.X)
@@ -2355,16 +2355,7 @@ spawn(function()
 
 	for _, Path in pairs (Paths) do
 		PartNum += 1
-		local ObjectNum = Instance.new("NumberValue", Path)
-		ObjectNum.Name = "ObjectNum"
-		ObjectNum.Value = PartNum
 		for _, InstanceRender in pairs (Path:GetDescendants()) do
-			local Success, Error = pcall(function()
-				PartNum += 1
-				local ObjectNum = Instance.new("NumberValue", InstanceRender)
-				ObjectNum.Name = "ObjectNum"
-				ObjectNum.Value = PartNum
-			end)
 			if not Success then
 				warn(Error)
 			end
