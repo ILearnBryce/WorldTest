@@ -10,7 +10,7 @@ local Paths = {workspace}
 local PartNum = 0
 local InitialDataVector = Vector2.new(0, 0)
 local FinalDataVector = Vector2.new(800, 800)
-local Translate = Vector2.new(2, 0)
+local Translate = Vector2.new(2, -1)
 
 local DistanceX = Translate.X * (FinalDataVector.X - InitialDataVector.X)
 local DistanceY = Translate.Y * (FinalDataVector.Y - InitialDataVector.Y)
