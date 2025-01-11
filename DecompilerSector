@@ -2354,33 +2354,14 @@ spawn(function()
 	local function RecurseChild(Obj)
 		local Children = {}
 		for _, Child in pairs (Obj:GetChildren()) do
-			if not table.find(NeglectClasses, Child.ClassName) then
-				print(Child)
-				if Child:IsA("BasePart") then
-					print(Child.Position.X >= InitialDataVector.X, Child.Position.X <= FinalDataVector.X,
-						Child.Position.Z >= InitialDataVector.Y, Child.Position.Z <= FinalDataVector.Y)
-					if (Child.Position.X >= InitialDataVector.X and Child.Position.X <= FinalDataVector.X) and
-						(Child.Position.Z >= InitialDataVector.Y and Child.Position.Z <= FinalDataVector.Y) then
-						pcall(function()
-							table.insert(Children, {
-								["Name"] = Child.Name,
-								["ClassName"] = Child.ClassName,
-								["Properties"] = GetProperties(Child),
-								["Children"] = RecurseChild(Child)
-							})
-						end)
-					end
-				else
-					pcall(function()
-						table.insert(Children, {
-							["Name"] = Child.Name,
-							["ClassName"] = Child.ClassName,
-							["Properties"] = GetProperties(Child),
-							["Children"] = RecurseChild(Child)
-						})
-					end)
-				end
-			end
+			pcall(function()
+				table.insert(Children, {
+					["Name"] = Child.Name,
+					["ClassName"] = Child.ClassName,
+					["Properties"] = GetProperties(Child),
+					["Children"] = RecurseChild(Child)
+				})
+			end)
 		end
 		return Children
 	end
@@ -2419,12 +2400,23 @@ spawn(function()
 			NumberValue.Value = PropertyValue
 		end
 	end
-
+	
 	for _, Path in pairs (Paths) do
-		InstanceTable[Path.Name] = RecurseChild(Path)
+		local Folder = Instance.new("Folder")
+		if Path == workspace then
+			for _, Child in pairs (workspace:GetDescendants()) do
+				if Child:IsA("BasePart") and not table.find(NeglectClasses, Child.ClassName) then
+					if (Child.Position.X >= InitialDataVector.X and Child.Position.X <= FinalDataVector.X) and
+						(Child.Position.Z >= InitialDataVector.Y and Child.Position.Z <= FinalDataVector.Y) then
+						Child:Clone().Parent = Folder
+					end
+				end
+			end
+		end
+		InstanceTable[Path.Name] = RecurseChild(Folder)
 	end
 	print("Success")
-	--print(HttpService:JSONEncode(InstanceTable))
+	print(HttpService:JSONEncode(InstanceTable))
 
 	setclipboard(HttpService:JSONEncode(InstanceTable))
 end)
