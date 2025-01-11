@@ -2353,15 +2353,6 @@ spawn(function()
 		return Children
 	end
 
-	for _, Path in pairs (Paths) do
-		PartNum += 1
-		for _, InstanceRender in pairs (Path:GetDescendants()) do
-			if not Success then
-				warn(Error)
-			end
-		end
-	end
-
 	local LightingConfig = Instance.new("Configuration", game.Lighting)
 	LightingConfig.Name = "LightingProperties"
 	for _, Property in pairs (Properties.Lighting) do
@@ -2378,7 +2369,7 @@ spawn(function()
 			NumberValue.Value = PropertyValue
 		end
 	end
-	
+
 	for _, Path in pairs (Paths) do
 		local Folder = Instance.new("Folder")
 		if Path == workspace then
