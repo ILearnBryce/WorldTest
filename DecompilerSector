@@ -6,11 +6,11 @@ end
 
 task.wait(2)
 
-local Paths = {workspace, game.Lighting}
+local Paths = {game.Lighting} --, 
 local PartNum = 0
 local InitialDataVector = Vector2.new(0, 0)
 local FinalDataVector = Vector2.new(500, 500)
-local Translate = Vector2.new(1, 2)
+local Translate = Vector2.new(2,1)
 
 local DistanceX = Translate.X * (FinalDataVector.X - InitialDataVector.X)
 local DistanceY = Translate.Y * (FinalDataVector.Y - InitialDataVector.Y)
@@ -2371,8 +2371,9 @@ spawn(function()
 	end
 
 	for _, Path in pairs (Paths) do
-		local Folder = Instance.new("Folder")
+		local Folder = nil
 		if Path == workspace then
+			Folder = Instance.new("Folder")
 			for _, Child in pairs (workspace:GetDescendants()) do
 				if Child:IsA("BasePart") and not table.find(NeglectClasses, Child.ClassName) then
 					if (Child.Position.X >= InitialDataVector.X and Child.Position.X <= FinalDataVector.X) and
@@ -2382,7 +2383,11 @@ spawn(function()
 				end
 			end
 		end
-		InstanceTable[Path.Name] = RecurseChild(Folder)
+		if Folder == nil then
+			InstanceTable[Path.Name] = RecurseChild(Path)
+		else
+			InstanceTable[Path.Name] = RecurseChild(Folder)
+		end
 	end
 	print("Success")
 	print(HttpService:JSONEncode(InstanceTable))
