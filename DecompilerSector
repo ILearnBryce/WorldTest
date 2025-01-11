@@ -2376,10 +2376,7 @@ spawn(function()
 			Folder = Instance.new("Folder")
 			for _, Child in pairs (workspace:GetDescendants()) do
 				if Child:IsA("BasePart") and not table.find(NeglectClasses, Child.ClassName) then
-					if (Child.Position.X >= InitialDataVector.X and Child.Position.X <= FinalDataVector.X) and
-						(Child.Position.Z >= InitialDataVector.Y and Child.Position.Z <= FinalDataVector.Y) then
-						Child:Clone().Parent = Folder
-					end
+					Child:Clone().Parent = Folder
 				end
 			end
 		end
