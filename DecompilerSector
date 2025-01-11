@@ -10,7 +10,7 @@ local Paths = {workspace, game.Lighting}
 local PartNum = 0
 local InitialDataVector = Vector2.new(0, 0)
 local FinalDataVector = Vector2.new(500, 500)
-local Translate = Vector2.new(2,1)
+local Translate = Vector2.new(2,2)
 
 local DistanceX = Translate.X * (FinalDataVector.X - InitialDataVector.X)
 local DistanceY = Translate.Y * (FinalDataVector.Y - InitialDataVector.Y)
